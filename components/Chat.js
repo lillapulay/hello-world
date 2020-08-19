@@ -1,14 +1,14 @@
 // Importing dependencies
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { GiftedChar, GiftedChat } from 'react-native-gifted-chat';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, Platform, KeyboardAvoidingView } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
 
 export default class Chat extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      messages: [],
+      messages: []
     }
   }
 
@@ -42,34 +42,37 @@ export default class Chat extends React.Component {
 
   render() {
 
-    /*  // Defining variables from SplashScreen
-      let { userName, backgroundColor } = this.props.route.params;
-  
-      // Setting default username in case the user didn't enter one
-      if (!userName || userName === '') userName = 'User'
-  
-      // Displaying username on the navbar in place of the title
-      this.props.navigation.setOptions({ title: userName });
-  */
+    // Defining variables from SplashScreen
+    let { userName, backgroundColor } = this.props.route.params;
+
+    // Setting default username in case the user didn't enter one
+    if (!userName || userName === '') userName = 'User'
+
+    // Displaying username on the navbar in place of the title
+    this.props.navigation.setOptions({ title: userName });
 
     return (
-      // Rendering chat interface - GiftedChat component comes with its on props
-      <GiftedChat
-        messages={this.state.messages}
-        onSend={messages => this.onSend(messages)}
-        user={{
-          _id: 1,
-        }}
-      />
-    )
+      // Rendering chat layout
+      <View style={[styles.chatBackground, { backgroundColor: backgroundColor }]}>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={messages => this.onSend(messages)}
+          user={{
+            _id: 1,
+          }}
+        />
+        {/* If the device OS is Android, adjust height when the keyboard pops up */}
+        {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
+      </View>
+    );
   }
-}
+};
 
 // Creating styling
 const styles = StyleSheet.create({
   chatBackground: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
 })

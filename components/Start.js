@@ -2,7 +2,7 @@
 import React from 'react';
 import {
   StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground,
-  Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard
+  Platform, KeyboardAvoidingView,
 } from 'react-native';
 
 // Importing the background image from the assets folder
@@ -36,7 +36,7 @@ export default class SplashScreen extends React.Component {
           {/* App title */}
           <Text style={styles.title}>
             Hello World!
-            </Text>
+          </Text>
 
           {/* Login box */}
           <View

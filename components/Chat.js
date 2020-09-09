@@ -77,11 +77,12 @@ export default class Chat extends React.Component {
   }
 
   componentDidMount() {
-    NetInfo.fetch().then(state => {
+    NetInfo.fetch().then((state) => {
       if (state.isConnected) {
         this.authUnsubscribe = firebase
           .auth()
-          .onAuthStateChanged(async user => {
+          .onAuthStateChanged(async (user) => {
+            // console.log("user is :", user);
             if (!user) {
               try {
                 await firebase.auth().signInAnonymously();
@@ -89,16 +90,16 @@ export default class Chat extends React.Component {
                 console.log(error.message);
               }
             }
+            console.log("props: ", this.props);
             this.setState({
               isConnected: true,
               user: {
                 _id: user.uid,
-                name: this.props.navigation.state.params.name
+                name: this.props.route.params.userName,
               },
               loggedInText:
-                this.props.navigation.state.params.name +
-                " has entered the chat",
-              messages: []
+                this.props.route.params.userName + " has entered the chat",
+              messages: [],
             });
             this.unsubscribe = this.referenceMessages
               .orderBy("createdAt", "desc")
@@ -106,7 +107,7 @@ export default class Chat extends React.Component {
           });
       } else {
         this.setState({
-          isConnected: false
+          isConnected: false,
         });
         this.getMessages();
       }

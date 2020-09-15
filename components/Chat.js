@@ -167,7 +167,7 @@ export default class Chat extends React.Component {
         this.saveMessages();
       }
     );
-    this.addMessages();
+    this.addMessage();
   }
 
   // Changing the color of the right side chat bubble

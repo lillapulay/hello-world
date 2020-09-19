@@ -58,6 +58,7 @@ export default class Chat extends React.Component {
         _id: data._id,
         text: data.text,
         createdAt: data.createdAt.toDate(),
+        //user: data.user,
         user: {
           _id: data.user._id,
           name: data.user.name,
@@ -70,7 +71,7 @@ export default class Chat extends React.Component {
     this.setState({
       messages
     });
-  }
+  };
 
   // Adding the message object to the collection
   addMessage() {

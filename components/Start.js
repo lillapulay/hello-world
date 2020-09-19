@@ -18,16 +18,14 @@ export default class SplashScreen extends React.Component {
 
     // Initializing the state of the app
     this.state = {
-      userName: '',
+      name: '',
       // Setting a default background color in case the user doesn't select one - can overwrite it by tapping on a color
       backgroundColor: backgroundColorOptions[2]
     };
   }
 
   render() {
-
     return (
-
       // Setting background image to cover the whole screen
       <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
 
@@ -45,10 +43,10 @@ export default class SplashScreen extends React.Component {
             <TextInput
               style={styles.input}
               // Updating username based on user's input
-              onChangeText={(userName) => this.setState({ userName })}
+              onChangeText={(name) => this.setState({ name })}
               // Displaying user's input as it's being typed
-              value={this.state.text}
-              // Displaying to user what to input
+              value={this.state.name}
+              // Displaying what to input
               placeholder='Your Name'
             />
 
@@ -97,7 +95,7 @@ export default class SplashScreen extends React.Component {
                 // Navigates to Chat view when the user taps on it
                 onPress={() => this.props.navigation.navigate('Chat', {
                   // Updates the username as per user's input
-                  userName: this.state.userName,
+                  userNamnamee: this.state.name,
                   // Updates the background color as per user's choice (circle)
                   backgroundColor: this.state.backgroundColor
                 })}

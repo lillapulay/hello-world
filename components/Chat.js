@@ -154,10 +154,10 @@ export default class Chat extends React.Component {
             isConnected: true,
             user: {
               _id: user.uid,
-              name: this.props.route.params.name,
+              name: this.props.route.params.user,
             },
             loggedInText:
-              this.props.route.params.name + " has entered the chat",
+              this.props.route.params.user + " has entered the chat",
             messages: [],
           });
           this.unsubscribe = this.referenceMessages.orderBy("createdAt", "desc")
@@ -170,6 +170,8 @@ export default class Chat extends React.Component {
         this.getMessages();
       }
     });
+    // Resolves timer-related warnings
+    YellowBox.ignoreWarnings(['Setting a timer', 'Animated']);
   }
 
   // Stop listening to authentication and collection changes
@@ -179,13 +181,16 @@ export default class Chat extends React.Component {
   }
 
   // 'Render' functions
-  // Changing the color of the right side chat bubble
+  // Changing the color of the chat bubble
   renderBubble(props) {
     return (
       <Bubble{...props}
         wrapperStyle={{
           right: {
-            backgroundColor: 'grey'
+            backgroundColor: '#008B8B'
+          },
+          left: {
+            backgroundColor: 'white'
           }
         }}
       />
@@ -227,13 +232,13 @@ export default class Chat extends React.Component {
     //const { messages, uid } = this.state;
 
     // Defining variables from SplashScreen
-    let { name, backgroundColor } = this.props.route.params;
+    let { user, backgroundColor } = this.props.route.params;
 
     // Setting default username in case the user didn't enter one
-    if (!name || name === '') name = 'User'
+    if (!user || user === '') user = 'User'
 
     // Displaying username on the navbar in place of the title
-    this.props.navigation.setOptions({ title: name });
+    this.props.navigation.setOptions({ title: user });
 
     return (
       // Rendering chat layout

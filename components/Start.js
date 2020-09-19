@@ -95,7 +95,7 @@ export default class SplashScreen extends React.Component {
                 // Navigates to Chat view when the user taps on it
                 onPress={() => this.props.navigation.navigate('Chat', {
                   // Updates the username as per user's input
-                  userNamnamee: this.state.name,
+                  user: this.state.name,
                   // Updates the background color as per user's choice (circle)
                   backgroundColor: this.state.backgroundColor
                 })}

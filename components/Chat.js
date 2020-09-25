@@ -27,9 +27,32 @@ import CustomActions from './CustomActions';
 const firebase = require('firebase');
 require('firebase/firestore');
 
+/**
+* @class Chat
+* @requires React
+* @requires React-native
+* @requires react-native-gifted-chat
+* @requires react-native-gifted-chat/netinfo
+* @requires CustomActions from './CustomActions'
+* @requires firebase
+* @requires firestore
+*/
+
+// Creating the Chat component
 export default class Chat extends React.Component {
   constructor() {
     super();
+
+    /**
+    * Firestore credentials
+    * @param {string} apiKey
+    * @param {string} authDomain
+    * @param {string} databaseURL
+    * @param {string} projectId
+    * @param {string} storageBucket
+    * @param {string} messageSenderId
+    * @param {string} appId
+    */
 
     // Referencing the Firestore database
     if (!firebase.apps.length) {
@@ -60,8 +83,18 @@ export default class Chat extends React.Component {
     };
   }
 
+  /**
+  * @function componentDidMount
+  * NetInfo checks whether user is online
+  * Then sets state accordingly
+  * Uses Firebase anonymous authentication
+  * Subscribes authenticated user to Firestore collection
+  * Retrieves user's messages from Firestore
+  */
+
   // Upon loading the app
   componentDidMount() {
+    // Checking if user is online
     NetInfo.fetch().then((state) => {
       if (state.isConnected) {
         this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
@@ -80,9 +113,11 @@ export default class Chat extends React.Component {
             },
             messages: [],
           });
+          // Fixing the order of messages
           this.unsubscribe = this.referenceMessages.orderBy('createdAt', 'desc')
             .onSnapshot(this.onCollectionUpdate);
         });
+        // If user is offline
       } else {
         this.setState({
           isConnected: false,
@@ -94,11 +129,22 @@ export default class Chat extends React.Component {
     YellowBox.ignoreWarnings(['Setting a timer', 'Animated']);
   }
 
-  // Stop listening to authentication and collection changes
+  /**
+   * @function componentWillUnmount
+   * Stops listening to authentication and collection changes
+  */
+
+  // Upon closing the app
   componentWillUnmount() {
     this.authUnsubscribe();
     this.unsubscribe();
   }
+
+  /**
+  * @function onSend
+  * @param {*} messages - type: {message/image/location}
+  * @returns {state} - updates state with new message
+  */
 
   // Function called upon sending a message
   onSend(messages = []) {
@@ -115,11 +161,17 @@ export default class Chat extends React.Component {
     );
   }
 
-  // Async functions
-  // Retrieves messages from AsyncStorage
+  /**
+  * Retrieves messages from async storage
+  * Parses messages
+  * @function getMessages
+  * @return messages
+  */
+
   getMessages = async () => {
     let messages = '';
     try {
+      // GETs messages from AsyncStorage
       messages = await AsyncStorage.getItem('messages') || [];
       this.setState({
         messages: JSON.parse(messages),
@@ -129,7 +181,14 @@ export default class Chat extends React.Component {
     }
   }
 
-  // Saves messages to AsyncStorage
+  /**
+  * Saves messages to asyncStorage
+  * Stringifies messages
+  * @function saveMessages
+  * @async
+  * @return {Promise<string>} - Messages from asyncStorage
+  */
+
   saveMessages = async () => {
     try {
       await AsyncStorage.setItem(
@@ -141,7 +200,12 @@ export default class Chat extends React.Component {
     }
   }
 
-  // Deletes messages from AsyncStorage
+  /**
+   * Deletes messages from asyncStorage
+   * @function deleteMessages
+   * @async
+  */
+
   deleteMessages = async () => {
     try {
       await AsyncStorage.removeItem('messages');
@@ -150,7 +214,17 @@ export default class Chat extends React.Component {
     }
   }
 
-  // Writes chat messages to state messages
+  /**
+  * Updates state with new message
+  * @function onCollectionUpdate
+  * @param {string} _id
+  * @param {string} text
+  * @param {string} image - uri of image
+  * @param {number} location - coordinates
+  * @param {string} user
+  * @param {date} createdAt
+  */
+
   onCollectionUpdate = (querySnapshot) => {
     const messages = [];
     // Maps through all documents for data
@@ -174,7 +248,17 @@ export default class Chat extends React.Component {
     });
   };
 
-  // Adding the message object to the collection
+  /**
+   * Adds the message object to the collection
+   * @function addMessage
+   * @param {number} _id
+   * @param {string} text
+   * @param {date} createdAt
+   * @param {string} user
+   * @param {image} image
+   * @param {number} geo - coordinates
+   */
+
   addMessage() {
     const message = this.state.messages[0];
     this.referenceMessages.add({
@@ -188,8 +272,13 @@ export default class Chat extends React.Component {
     });
   }
 
-  // 'Render' functions
-  // Changing the color of the chat bubble
+  /**
+  * Changes bubble color
+  * @function renderBubble
+  * @param {*} props
+  * @returns {Bubble}
+  */
+
   renderBubble(props) {
     return (
       <Bubble
@@ -206,7 +295,13 @@ export default class Chat extends React.Component {
     );
   }
 
-  // Disables InputToolbar if user is offline
+  /**
+  * Doesn't render inputToolbar if user is offline
+  * @function renderInputToolbar
+  * @param {*} props
+  * @returns {InputToolbar}
+  */
+
   renderInputToolbar = (props) => {
     if (this.state.isConnected === false) {
     } else {
@@ -214,11 +309,21 @@ export default class Chat extends React.Component {
     }
   };
 
-  // Rendering the '+' button
-  // eslint-disable-next-line arrow-body-style
-  renderCustomActions = (props) => {
-    return <CustomActions {...props} />;
-  };
+  /**
+  * Rendering the '+' button
+  * @function renderCustomActions
+  * @param {*} props
+  * @returns {CustomActions}
+  */
+
+  renderCustomActions = (props) => <CustomActions {...props} />;
+
+  /**
+  * Renders MapView if message has coords
+  * @function renderCustomView
+  * @param {*} props
+  * @returns {MapView}
+  */
 
   renderCustomView(props) {
     const { currentMessage } = props;
@@ -276,7 +381,10 @@ export default class Chat extends React.Component {
   }
 }
 
-// Creating styling
+/**
+* Creating styling
+*/
+
 const styles = StyleSheet.create({
   chatBackground: {
     flex: 1,

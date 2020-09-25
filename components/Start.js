@@ -17,6 +17,12 @@ const backgroundImage = require('../assets/Background_Image.png');
 // Array of background colors with HEX codes to choose from
 const backgroundColorOptions = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
 
+/**
+* @class SplashScreen
+*@requires react
+*@requires react-native
+*/
+
 export default class SplashScreen extends React.Component {
   constructor() {
     super();
@@ -30,6 +36,11 @@ export default class SplashScreen extends React.Component {
   }
 
   render() {
+    /**
+    * User can add their name to TextInput
+    * TouchableOpacity sets the Chat background color
+    */
+
     return (
       // Setting background image to cover the whole screen
       <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
@@ -121,7 +132,10 @@ export default class SplashScreen extends React.Component {
   }
 }
 
-// Creating styling
+/**
+* Creating styling
+*/
+
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,

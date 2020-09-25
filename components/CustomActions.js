@@ -23,8 +23,27 @@ import * as Location from 'expo-location';
 const firebase = require('firebase');
 require('firebase/firestore');
 
+/**
+* @class CustomActions
+* @requires react
+* @requires prop-types
+* @requires react-native
+* @requires expo-permissions
+* @requires expo-image-picker
+* @requires expo-location
+* @requires firebase
+* @requires firestore
+*/
+
+// Creating the '+' button on the bottom for more actions
 export default class CustomActions extends React.Component {
-  // For choosing a picture from the device's library (camera roll)
+  /**
+  * For choosing a picture from the device's library (camera roll)
+  * Asks user for permission
+  * @async
+  * @function pickImage
+  */
+
   pickImage = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     // Only grant access if user accepts
@@ -44,7 +63,13 @@ export default class CustomActions extends React.Component {
     }
   };
 
-  // For taking a new image with the device's camera
+  /**
+  * For taking a new image with the device's camera
+  * Asks user for permission
+  * @async
+  * @function takePhoto
+  */
+
   takePhoto = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
     // Only access if user grants permission
@@ -63,7 +88,13 @@ export default class CustomActions extends React.Component {
     }
   };
 
-  // For accessing the user's location data
+  /**
+  * For accessing the user's location data
+  * Asks user for permission
+  * @async
+  * @function getLocation
+  */
+
   getLocation = async () => {
     try {
       const { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -83,7 +114,15 @@ export default class CustomActions extends React.Component {
     }
   };
 
-  // Uploads image as blob
+  /**
+  * Uploads image to storage as blob
+  * Manages XMLHttpRequest
+  * Defines respons type
+  * Creates file name
+  * @async
+  * @function uploadImage
+  */
+
   uploadImage = async (uri) => {
     const blob = await new Promise((resolve, reject) => {
       // New XMLHttpRequest
@@ -113,7 +152,13 @@ export default class CustomActions extends React.Component {
     return imageUrl;
   }
 
-  // Defining the functionality for the '+' button
+  /**
+  * Defines the functionality for the '+' button
+  * Tapping '+' calls actionSheet
+  * @function onActionPress
+  * @returns {actionSheet} - choose from library/take photo/send location/cancel
+  */
+
   onActionPress = () => {
     const options = [
       'Choose Image From Library',
@@ -183,6 +228,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+/**
+* Creating styling
+*/
 
 CustomActions.contextTypes = {
   actionSheet: PropTypes.func,

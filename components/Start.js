@@ -1,3 +1,9 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable linebreak-style */
 // Importing dependencies
 import React from 'react';
 import {
@@ -9,18 +15,17 @@ import {
 const backgroundImage = require('../assets/Background_Image.png');
 
 // Array of background colors with HEX codes to choose from
-const backgroundColorOptions = ['#090C08', '#474056', '#8A95A5', '#B9C6AE']
+const backgroundColorOptions = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
 
 export default class SplashScreen extends React.Component {
-
   constructor() {
     super();
 
     // Initializing the state of the app
     this.state = {
       name: '',
-      // Setting a default background color in case the user doesn't select one - can overwrite it by tapping on a color
-      backgroundColor: backgroundColorOptions[2]
+      // Setting a default background color in case the user doesn't select one
+      backgroundColor: backgroundColorOptions[2],
     };
   }
 
@@ -37,8 +42,7 @@ export default class SplashScreen extends React.Component {
           </Text>
 
           {/* Login box */}
-          <View
-            style={styles.loginBox}>
+          <View style={styles.loginBox}>
             {/* Input field for username */}
             <TextInput
               style={styles.input}
@@ -47,49 +51,49 @@ export default class SplashScreen extends React.Component {
               // Displaying user's input as it's being typed
               value={this.state.name}
               // Displaying what to input
-              placeholder='Your Name'
+              placeholder="Your Name"
             />
 
             {/* Choose background color */}
             <View style={styles.chooseColorBox}>
               <Text style={styles.chooseColor}>
                 Choose Background Color:
-            </Text>
+              </Text>
             </View>
 
             {/* Displaying background color options (circles) */}
             <View style={styles.backgroundColorOptions}>
 
               <TouchableOpacity
-                // Changing the background color to this if user taps on it - position: 0 from the array defined above
+                // Changing the background color - position: 0 from the array defined above
                 onPress={() => this.setState({ backgroundColor: backgroundColorOptions[0] })}
                 // Displaying the color (circle) itself
                 style={[styles.colorSelector, { backgroundColor: backgroundColorOptions[0] }]}
               />
 
               <TouchableOpacity
-                // Changing the background color to this if user taps on it - position: 1 from the array defined above
+                // Changing the background color - position: 1 from the array defined above
                 onPress={() => this.setState({ backgroundColor: backgroundColorOptions[1] })}
                 // Displaying the color (circle) itself
                 style={[styles.colorSelector, { backgroundColor: backgroundColorOptions[1] }]}
               />
 
               <TouchableOpacity
-                // Changing the background color to this if user taps on it - position: 2 from the array defined above
+                // Changing the background color - position: 2 from the array defined above
                 onPress={() => this.setState({ backgroundColor: backgroundColorOptions[2] })}
                 // Displaying the color (circle) itself
                 style={[styles.colorSelector, { backgroundColor: backgroundColorOptions[2] }]}
               />
 
               <TouchableOpacity
-                // Changing the background color to this if user taps on it - position: 3 from the array defined above
+                // Changing the background color - position: 3 from the array defined above
                 onPress={() => this.setState({ backgroundColor: backgroundColorOptions[3] })}
                 // Displaying the color (circle) itself
                 style={[styles.colorSelector, { backgroundColor: backgroundColorOptions[3] }]}
               />
             </View>
 
-            {/* Start Chatting button*/}
+            { /* Start Chatting button */}
             <View style={styles.startButton}>
               <TouchableOpacity
                 // Navigates to Chat view when the user taps on it
@@ -97,7 +101,7 @@ export default class SplashScreen extends React.Component {
                   // Updates the username as per user's input
                   user: this.state.name,
                   // Updates the background color as per user's choice (circle)
-                  backgroundColor: this.state.backgroundColor
+                  backgroundColor: this.state.backgroundColor,
                 })}
               >
                 {/* Text on the button */}
@@ -112,8 +116,8 @@ export default class SplashScreen extends React.Component {
           {/* If the device OS is Android, adjust height when the keyboard pops up */}
           {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
         </View>
-      </ImageBackground >
-    )
+      </ImageBackground>
+    );
   }
 }
 
@@ -121,8 +125,8 @@ export default class SplashScreen extends React.Component {
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
   title: {
     flex: 1,
@@ -197,5 +201,5 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#FFFFFF',
     marginTop: 16,
-  }
-})
+  },
+});

@@ -75,6 +75,7 @@ You can check out the board here:
 
 ### Planned updates:
 #### SplashScreen:
-- [x] Change chat bubble color (Chat.js)
-- [ ] Place 'user' icon in TextInput (SplashScreen)
-- [ ] Fix KeyboardAvoidingView (SplashScreen)
+- [ ] Place 'user' icon in TextInput
+- [ ] Fix KeyboardAvoidingView
+#### Chat:
+- [x] Change chat bubble color

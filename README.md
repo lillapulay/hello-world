@@ -50,7 +50,7 @@ Install all dependencies by running `npm install` in the project directory.
 * "firebase",
 * "prop-types",
 * "react",
-*"react-dom",
+* "react-dom",
 * "react-native",
 * "react-native-gesture-handler",
 * "react-native-gifted-chat",

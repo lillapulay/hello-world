@@ -1,5 +1,6 @@
 # Hello World!
 
+![app demo](/assets/chatapp.png)
 
 ## About
 Mobile application written in React Native, utilizing React Navigation and React Native Gifted Chat, amongst others.
@@ -69,11 +70,11 @@ The app uses [GiftedChat](https://github.com/FaridSafi/react-native-gifted-chat)
 During development I kept a simple KanBan board for managing this project,
 that included using story points for time estimation.
 You can check out the board here: 
-[Native Mobile Chat App](https://trello.com/b/NkHbsCSu/native-mobile-chat-app)
+[Native Mobile Chat App](https://trello.com/b/NkHbsCSu/native-mobile-chat-app).
 
 
 ### Planned updates:
 #### SplashScreen:
-- [x] Change chat bubble color
-- [ ] Place 'user' icon in TextInput
-- [ ] Fix KeyboardAvoidingView on SplashScreen
+- [x] Change chat bubble color (Chat.js)
+- [ ] Place 'user' icon in TextInput (SplashScreen)
+- [ ] Fix KeyboardAvoidingView (SplashScreen)

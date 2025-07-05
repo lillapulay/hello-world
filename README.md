@@ -71,11 +71,3 @@ During development I kept a simple KanBan board for managing this project,
 that included using story points for time estimation.
 You can check out the board here: 
 [Native Mobile Chat App](https://trello.com/b/NkHbsCSu/native-mobile-chat-app).
-
-
-### Planned updates:
-#### SplashScreen:
-- [ ] Place 'user' icon in TextInput
-- [ ] Fix KeyboardAvoidingView
-#### Chat:
-- [x] Change chat bubble color
